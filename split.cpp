@@ -11,6 +11,7 @@ the function below should be the only one in this file.
 */
 
 #include "split.h"
+#include <cstddef>
 
 /* Add a prototype for a helper function here if you need */
 
@@ -18,6 +19,19 @@ void split(Node*& in, Node*& odds, Node*& evens)
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
+  if(in == NULL){
+    return;
+  }else if((in->value %2) == 0){
+    evens = in;
+    in = in->next;
+    evens->next = NULL;
+    return split(in, odds, evens->next);
+  }else{
+    odds = in;
+    in = in->next;
+    odds->next = NULL;
+    return split(in, odds->next, evens);
+  }
 }
 
 /* If you needed a helper function, write it here */
